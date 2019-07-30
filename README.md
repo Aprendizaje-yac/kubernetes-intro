@@ -16,4 +16,12 @@
 
 - Upload container images to local hub, https://hub.srv.unc.edu.ar
 
+### Workload
+
+```     
+          name                 
+{world} <------> | ingress | <---> | service | <---> | Pod(s) |
+```
+
+
 
