@@ -1,6 +1,6 @@
 # Intro a Kubernetes
 
-### Concepts
+## Concepts
 
 - **Kubernetes:** container orchestrator
 - **Cluster:** group of machines running kubernetes
@@ -19,9 +19,15 @@
 ### Workload
 
 ```     
-          name                 
-{world} <------> | ingress | <---> | service | <---> | Pod(s) |
++--------+       +---------+       +---------+   name                 
+| Pod(s) | <---> | service | <---> | ingress | <------> { world } 
++--------+       +---------+       +---------+
 ```
 
+## Using Kubernetes (GUI)
+
+- **url** https://rancher2-dev.srv.unc.edu.ar/
+- **user** admin
+- **pass** Lyq756
 
 
