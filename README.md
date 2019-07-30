@@ -1,17 +1,19 @@
 # Intro a Kubernetes
 
-## Concepts
+### Concepts
 
 - **Kubernetes:** container orchestrator
 - **Cluster:** group of machines running kubernetes
-- **Service:** Unit of access, connect to Pods
-- **Ingress:** Unit of access from outside world, *name* driven
+- **Deployment**
+	- **Pod** Unit of execution, normally with one container, dynamic address
+	- **Service:** Unit of access, connect to Pods
+	- **Ingress:** Unit of access from outside world, *name* driven
 - **`kubectl`:** command line tool to configure kubernetes
 - **`helm`:** command line tool to deploy workloads
 - **Chart:** helm work unit
 
-### Kubernets objects
+### Manage images
 
-- **Pod:** Unit of execution, normally with one container, dynamic address
+- Upload container images to local hub, https://hub.srv.unc.edu.ar
 
 
