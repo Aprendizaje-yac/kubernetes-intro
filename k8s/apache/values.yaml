@@ -1,0 +1,19 @@
+# Default values for gde-v3.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 3
+
+name: "apache-test"
+namespace: "intro"
+configmapname: "apache-test-configmap"
+secretname: "apache-test-secret"
+image: "hub.srv.unc.edu.ar/bgkriegel/apache-test"
+url: "apache-test-bgk.dev.unc.edu.ar"
+
+variables:
+  configmap:
+    - name: host
+  secret:
+    - name: user
+    - name: pass

@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apache-test-configmap
+data:
+  protocol: "http"
+  port: "80"
+  host: "el-host-final"
+...

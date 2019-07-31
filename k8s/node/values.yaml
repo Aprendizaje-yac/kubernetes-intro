@@ -1,0 +1,12 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 3
+
+name: "node-test"
+namespace: "intro"
+image: "hub.srv.unc.edu.ar/bgkriegel/node-test"
+url: "node-test-bgk.dev.unc.edu.ar"
+port: "8080"
+
+
