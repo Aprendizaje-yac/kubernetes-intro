@@ -92,12 +92,12 @@
 	(*`project-name`* fancy name for deployment, if absent docker-like name)
 
 ### Helm commands
-- ***install*** `$ helm install project/ -n project-name`
-- ***remove*** `$ helm delete --purge project-name`
-- ***upgrade** `$ helm upgrade --recreate-pods project-name project/`
-- ***check*** `$ helm lint project/`
-- ***list*** `$ helm list`
-- ***debug*** `$ helm install --debug --dry-run project/`
+- **install** `$ helm install project/ -n project-name`
+- **remove** `$ helm delete --purge project-name`
+- **upgrade** `$ helm upgrade --recreate-pods project-name project/`
+- **check** `$ helm lint project/`
+- **list** `$ helm list`
+- **debug** `$ helm install --debug --dry-run project/`
 
 ### Node example
 - Install
