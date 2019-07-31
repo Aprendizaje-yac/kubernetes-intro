@@ -124,18 +124,23 @@
 - Configmap
 	- Install (**NOTE** specify namespace)
 	```
-	$ kubectl apply -f apache-test-configmap.yaml --namespace intro
+	$ kubectl apply -f ./apache-test-configmap.yaml --namespace intro
 	```
 	- Upgrade
 	```
-	$ kubectl replace -f apache-test-secrets.yaml --namespace intro
+	$ kubectl replace -f ./apache-test-secrets.yaml --namespace intro
 	```
 	- Delete
 	```
-	$ kubectl delete -f apache-test-secrets.yaml --namespace intro
+	$ kubectl delete -f ./apache-test-secrets.yaml --namespace intro
 	```
 - Secret
-  - Same command as configmap
+  - Same commands as configmap
+- Checking
+  ```
+  $ kubectl get configmap --namespace intro
+  $ kubectl get secret --namespace intro
+  ```
 
 - Install workload
 	```
@@ -147,3 +152,60 @@
 	```
 	Wait a few seconds until ingress starts (check in GUI)
 	Add external access using https://redirector.dev.unc.edu.ar
+
+- Delete
+	```
+	$ cd k8s/
+	$ helm list
+	$ helm delete --purge apache-test
+	```
+
+- Install changing selected values
+	```
+	$ helm install apache/ -n apache-prod --set url=apache-prod.dev.unc.edu.ar,name=apache-prod
+	...
+	$ helm list
+	```
+	This enable using the same image for dev and prod !!
+
+## Working with charts repository
+- We can ***save*** our charts for anybody to use
+- We have a charts repo on https://charts.dev.unc.edu.ar
+- Add repo
+	```
+	$ helm repo list
+ 	$ helm repo add psi-charts https://charts.dev.unc.edu.ar
+ 	$ helm repo update
+ 	...
+ 	$ heml repo remove psi-charts
+ 	```
+
+- Search repo
+	```
+ 	$ helm search psi-charts/
+ 	```
+
+ - Add helm-push plugin
+ 	```
+ 	$ helm plugin install https://github.com/chartmuseum/helm-push
+ 	```
+
+- Pushing to repo
+ 	```
+ 	$ helm push mychart/ psi-charts
+ 	```
+ 
+- Install from repo
+	```
+ 	$ helm install psi-charts/mychart -n mychart-name
+ 	```
+
+- Upgrade from repo
+	```
+ 	$ helm upgrade --recreate-pods mychart-name psi-charts/mychart
+ 	``` 
+
+- Install from repo changing values
+	```
+ 	$ helm install psi-charts/apache -n apache-test-prod --set url=apache-prod.dev.unc.edu.ar,name=apache-prod 
+ 	```
