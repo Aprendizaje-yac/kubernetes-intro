@@ -4,6 +4,7 @@
 
 - **Kubernetes:** container orchestrator
 - **Cluster:** group of machines running kubernetes
+- **Namespace:** Logical grouping of deployments
 - **Deployment**
 	- **Pod** Unit of execution, normally with one container, dynamic address
 	- **Service:** Unit of access, connect to Pods
@@ -19,6 +20,7 @@
 ### Deployment
 
 ```     
+   *-app          *-service         *-ingress
 +--------+       +---------+       +---------+   name                 
 | Pod(s) | <---> | service | <---> | ingress | <------> { world } 
 +--------+       +---------+       +---------+
@@ -61,12 +63,87 @@
 
 ## Build and push example images
 - Node example from https://nodejs.org/de/docs/guides/nodejs-docker-webapp/
-- Apache example
+- Apache example using environment variables
 - 	```
 	$ cd images
 	$ ../build-push.sh node-test node/
 	$ ../build-push.sh apache-test apache/
 	```
-- Two images available:
+- Two images available (for user bgkriegel)
 	- hub.srv.unc.edu.ar/bgkriegel/node-test
 	- hub.srv.unc.edu.ar/bgkriegel/apache-test
+
+## App deployment using `helm`
+- `helm` use *charts* (https://helm.sh/docs/developing_charts/)
+- Basic structure
+	```
+	project/
+	     Charts.yaml
+	     values.yaml
+	     templates/
+	               deployment.yaml
+	               service.yaml
+	               ingress.yaml
+	```
+- Usage
+	```
+	$ helm install project/ -n project-name
+	```
+	(*`project-name`* fancy name for deployment, if absent docker-like name)
+
+### Helm commands
+- ***install*** `$ helm install project/ -n project-name`
+- ***remove*** `$ helm delete --purge project-name`
+- ***upgrade** `$ helm upgrade --recreate-pods project-name project/`
+- ***check*** `$ helm lint project/`
+- ***list*** `$ helm list`
+- ***debug*** `$ helm install --debug --dry-run project/`
+
+### Node example
+- Install
+	```
+	$ cd k8s/
+	$ helm list
+	$ helm install node/ -n node-test
+	...
+	$ helm list
+	```
+	Wait a few seconds until ingress starts (check in GUI)
+	Add external access using https://redirector.dev.unc.edu.ar
+
+- Delete
+	```
+	$ cd k8s/
+	$ helm list
+	$ helm delete --purge node-test
+	```
+
+### Apache example 
+- This example use environment varibles defined in secrets and configmaps
+- Take a look at *apache-test-configmap.yaml* and *apache-test-secrets.yaml*
+- Configmap
+	- Install (**NOTE** specify namespace)
+	```
+	$ kubectl apply -f apache-test-configmap.yaml --namespace intro
+	```
+	- Upgrade
+	```
+	$ kubectl replace -f apache-test-secrets.yaml --namespace intro
+	```
+	- Delete
+	```
+	$ kubectl delete -f apache-test-secrets.yaml --namespace intro
+	```
+- Secret
+  - Same command as configmap
+
+- Install workload
+	```
+	$ cd k8s/
+	$ helm list
+	$ helm install apache/ -n apache-test
+	...
+	$ helm list
+	```
+	Wait a few seconds until ingress starts (check in GUI)
+	Add external access using https://redirector.dev.unc.edu.ar
