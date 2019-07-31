@@ -205,7 +205,16 @@
  	$ helm upgrade --recreate-pods mychart-name psi-charts/mychart
  	``` 
 
-- Install from repo changing values
+- Example
 	```
- 	$ helm install psi-charts/apache -n apache-test-prod --set url=apache-prod.dev.unc.edu.ar,name=apache-prod 
+	$ helm push voto/ psi-charts
+	$ helm repo update
+	$ helm search psi-charts/
+ 	$ helm install psi-charts/voto -n voto-test 
+ 	```
+
+### For production
+	```
+	$ helm repo update
+ 	$ helm install psi-charts/voto -n voto-prod --set url=voto-prod.dev.unc.edu.ar,name=voto-prod 
  	```
