@@ -59,3 +59,14 @@
 	  ```
 
 
+## Build and push example images
+- Node example from https://nodejs.org/de/docs/guides/nodejs-docker-webapp/
+- Apache example
+- 	```
+	$ cd images
+	$ ../build-push.sh node-test node/
+	$ ../build-push.sh apache-test apache/
+	```
+- Two images available:
+	- hub.srv.unc.edu.ar/bgkriegel/node-test
+	- hub.srv.unc.edu.ar/bgkriegel/apache-test
