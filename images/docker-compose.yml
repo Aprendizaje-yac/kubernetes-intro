@@ -1,0 +1,17 @@
+version: '3'
+services:
+  myweb:
+    build:
+        context: ./apache
+        dockerfile: Dockerfile
+    image: myweb
+    container_name: myweb
+    ports:
+     - "40080:80"
+    hostname: myweb-host
+    privileged: true
+    environment:
+     - host=NombreDeHost
+     - pass=UnaNuevaPass
+     - user=ElWebUser
+
